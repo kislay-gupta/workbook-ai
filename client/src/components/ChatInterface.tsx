@@ -33,6 +33,7 @@ export function ChatInterface({ onBack }: ChatInterfaceProps) {
     const handleSendMessage = (message: string) => {
         sendMessage(message)
     }
+    console.log(messages)
     usePageTitle(`${persona?.toUpperCase()} AI`)
     return (
         <div className="flex-1 flex flex-col h-screen bg-white">

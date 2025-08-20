@@ -29,6 +29,7 @@ function RagApp() {
             const result = await chatService.getStatus()
             showStatus(`🟢 ${result.status}${result.message ? ' - ' + result.message : ''}`, 'success')
         } catch (error) {
+            console.error("Error checking status:", error)
             showStatus('🔴 Server connection failed', 'error')
         }
     }
@@ -55,7 +56,10 @@ function RagApp() {
 
         try {
             const result = await chatService.sendMessage(question)
-
+            // Add the answer from the API as a bot message
+            if (result.answer) {
+                addBotMessage(result.answer, false)
+            }
 
             if (result.sources && result.sources > 0) {
                 setTimeout(() => {
@@ -130,7 +134,6 @@ function RagApp() {
             setIsLoading(false)
         }
     }
-
 
 
     return (
